@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mim.myinvestimentmanager.model.Usuario;
-import com.mim.myinvestimentmanager.service.interfaces.UsuarioService;
-import org.springframework.web.bind.annotation.PutMapping;
+import com.mim.myinvestimentmanager.model.User;
+import com.mim.myinvestimentmanager.service.interfaces.UserService;
 
 
 @RestController
@@ -23,31 +23,31 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class UsuarioController {
     
     @Autowired
-    private UsuarioService usuarioService;
+    private UserService userService;
 
     @PostMapping
-    public ResponseEntity<Usuario> save(@RequestBody Usuario object){
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.usuarioService.save(object));
+    public ResponseEntity<User> save(@RequestBody User object){
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.save(object));
     }
 
     @GetMapping("/listAll")
-    public ResponseEntity<List<Usuario>> listAll(){
-        return ResponseEntity.ok().body(this.usuarioService.list());
+    public ResponseEntity<List<User>> listAll(){
+        return ResponseEntity.ok().body(this.userService.list());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> findById(@PathVariable Long id){
-        return ResponseEntity.ok().body(this.usuarioService.searchById(id));
+    public ResponseEntity<User> findById(@PathVariable Long id){
+        return ResponseEntity.ok().body(this.userService.searchById(id));
     }
 
     @PutMapping
-    public ResponseEntity<Usuario> update(@RequestBody Usuario object) {
-        return ResponseEntity.ok().body(this.usuarioService.update(object));
+    public ResponseEntity<User> update(@RequestBody User object) {
+        return ResponseEntity.ok().body(this.userService.update(object));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        this.usuarioService.deleteById(id);
+        this.userService.deleteById(id);
 
         return ResponseEntity.ok().build();
     }

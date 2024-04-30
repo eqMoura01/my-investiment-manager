@@ -3,9 +3,9 @@ package com.mim.myinvestimentmanager.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.mim.myinvestimentmanager.model.Usuario;
+import com.mim.myinvestimentmanager.model.User;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
     
 }
