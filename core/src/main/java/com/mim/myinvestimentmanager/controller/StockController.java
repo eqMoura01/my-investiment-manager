@@ -14,41 +14,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mim.myinvestimentmanager.model.User;
-import com.mim.myinvestimentmanager.service.interfaces.UserService;
-
+import com.mim.myinvestimentmanager.model.Stock;
+import com.mim.myinvestimentmanager.service.interfaces.StockService;
 
 @RestController
-@RequestMapping("/user")
-public class UsuarioController {
+@RequestMapping("/stock")
+public class StockController {
     
     @Autowired
-    private UserService userService;
+    private StockService stockService;
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody User object){
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.save(object));
+    public ResponseEntity<Stock> save(@RequestBody Stock object){
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.stockService.save(object));
     }
 
     @GetMapping("/listAll")
-    public ResponseEntity<List<User>> listAll(){
-        return ResponseEntity.ok().body(this.userService.list());
+    public ResponseEntity<List<Stock>> listAll(){
+        return ResponseEntity.ok().body(this.stockService.list());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id){
-        return ResponseEntity.ok().body(this.userService.searchById(id));
+    public ResponseEntity<Stock> findById(@PathVariable Long id){
+        return ResponseEntity.ok().body(this.stockService.searchById(id));
     }
 
     @PutMapping
-    public ResponseEntity<User> update(@RequestBody User object) {
-        return ResponseEntity.ok().body(this.userService.update(object));
+    public ResponseEntity<Stock> update(@RequestBody Stock object) {
+        return ResponseEntity.ok().body(this.stockService.update(object));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        this.userService.deleteById(id);
+        this.stockService.deleteById(id);
 
         return ResponseEntity.ok().build();
     }
+
 }
