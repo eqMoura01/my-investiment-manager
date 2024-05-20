@@ -35,7 +35,7 @@ public class StockServiceImpl implements StockService{
         Optional<Stock> stock = this.stockRepository.findById(id);
 
         if (!stock.isPresent()) {
-            throw new EntityNotFoundException("O USUARIO COM ID " + id + " NÃO FOI ENCONTRADO.");
+            throw new EntityNotFoundException("A AÇÃO COM ID " + id + " NÃO FOI ENCONTRADA.");
         }
 
         return stock.get();

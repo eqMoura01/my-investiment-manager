@@ -21,7 +21,6 @@ import com.mim.myinvestimentmanager.service.interfaces.UserService;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
     
     @Autowired
@@ -32,7 +31,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.save(object));
     }
 
-    @GetMapping("/listAll")
+    @GetMapping
     public ResponseEntity<List<User>> listAll(){
         return ResponseEntity.ok().body(this.userService.list());
     }
