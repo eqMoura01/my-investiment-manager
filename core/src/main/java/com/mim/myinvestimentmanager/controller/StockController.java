@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +30,7 @@ public class StockController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.stockService.save(object));
     }
 
-    @GetMapping("/listAll")
+    @GetMapping
     public ResponseEntity<List<Stock>> listAll(){
         return ResponseEntity.ok().body(this.stockService.list());
     }
