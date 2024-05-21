@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+
+.typewriter {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.box-login,
+.box-signup {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.box-login .inpt {
+    width: 27rem;
+    padding: 15px 10px;
+    font-size: 1.4rem;
+    border-radius: 15px;
+    margin: 5px;
+    background: transparent;
+    outline: none;
+  }
+
+.box-login {
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  position: absolute;
+}
+.box-signup {
+    color: white;
+    transform: rotateY(180deg);
+    width: 100%;
+    height: 100%;
+    font-size: 1.5rem;
+    text-align: center;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    position: absolute;
+  }
+
+  .box-login ul {
+    padding: 26px;
+  }
+  
+  .box-signup ul {
+    padding: 10px;
+  }
+
+.box-signup .inpt {
+    width: 27rem;
+    padding: 15px;
+    font-size: 1.2rem;
+    border-radius: 15px;
+    margin: 5px;
+    background: transparent;
+    transition: 0.5s ease;
+    outline: none;
+  }
+
+
+.forget {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.register-link{
+    display:contents;
+    flex-direction: row;
+}
+
+form a:active {
+    color: blueviolet;
+  }
+  
+  .box-login .register-link {
+    font-size: 1rem;
+    /* margin-bottom: rem; */
+    padding-bottom: 15px;
+    font-style: italic;
+  }
+  
+  .box-signup .register-link {
+    font-size: 1rem;
+    /* margin-bottom: 3rem; */
+    padding-bottom: 30px;
+    font-style: italic;
+  }
+  
+  .register-link a {
+    color: blueviolet;
+    transition: 0.5s ease;
+  }
+  
+  .register-link a:active {
+    color: blue;
+  }
+  
+  .register-link a:hover {
+    color: red;
+    transform: scale(1.5);
+  }
+
+  .box-login form a {
+    text-decoration: none;
+    color: white;
+    padding-left: 150px;
+    font-size: 1rem;
+  }
+
+  .box-signup form a {
+    text-decoration: none;
+    color: white;
+    padding-left: 150px;
+    font-size: 1rem;
+  }
+  
+  label {
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  
