@@ -11,6 +11,7 @@ function App() {
       <div>
         <Stocks />
         <StockPurchases />
+        <a href="/StockForm">Cadastrar ação</a>
       </div>
     </>
   )
