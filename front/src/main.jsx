@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import Login from './pages/login-screen/Login.jsx';
 import './index.css';
 
 // Importa o react-router-dom
