@@ -18,6 +18,23 @@ const router = createBrowserRouter([
   },
 ]);
 
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import StockForm from './pages/StockForm.jsx';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>,
+  },
+  {
+    path: "/StockForm",
+    element: <StockForm/>,
+  },
+]);
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
