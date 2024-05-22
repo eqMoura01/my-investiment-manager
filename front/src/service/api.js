@@ -4,7 +4,7 @@ import axios from 'axios';
 // API 2 = Ações
 
 const userApi = axios.create({
-    baseURL: "http://viacep.com.br/ws/"
+    baseURL: "http://localhost:8080/user"
 });
 
 const stockApi = axios.create({
