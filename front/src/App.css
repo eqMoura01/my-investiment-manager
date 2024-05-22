@@ -8,17 +8,6 @@ body {
   color: white;
   background-size: fixed;
 }
-/* LoginForm.css */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
-body {
-  font-family: "Poppins", sans-serif;
-  background-image: url("assets/bg.png");
-  background-repeat: no-repeat;
-  color: white;
-  background-size: fixed;
-}
-
 .left-column {
   display: flex;
   flex-direction: column;
