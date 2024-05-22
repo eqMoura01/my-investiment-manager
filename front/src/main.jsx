@@ -8,26 +8,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Login from './pages/LoginScreen/Login.jsx';
-
-// Aqui configura o roteamento de paginas
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login/>,
-  },
-]);
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
 import StockForm from './pages/StockForm.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element:  <Login/>,
   },
   {
     path: "/StockForm",
