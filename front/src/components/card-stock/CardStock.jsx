@@ -9,6 +9,9 @@ const CardStock = (props) => {
             <span className="stock-name">
                 {props.stockName}
             </span>
+            <span className='stock-quantity'>
+                {props.qtd} ações
+            </span>
             <span className="stock-value">
                 R$  {props.stockValue}
             </span>

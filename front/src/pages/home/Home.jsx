@@ -26,23 +26,31 @@ const Home = () => {
 
             <div className="cards-row">
               {/* TODO: Criar componente para o card de ação */}
-              <CardStock symbol='PETR4' stockName='Petrobras' stockValue='30,78'/>
-              <CardStock symbol='VALE3' stockName='Vale' stockValue='45,23'/>
-              <CardStock symbol='MGLU3' stockName='Magazine Luiza' stockValue='22,56'/>
-              <CardStock symbol='ITUB4' stockName='Itaú' stockValue='27,45'/>
-              <CardStock symbol='BBDC4' stockName='Bradesco' stockValue='32,56'/>
-              <CardStock symbol='ABEV3' stockName='Ambev' stockValue='18,45'/>
-              <CardStock symbol='WEGE3' stockName='WEG' stockValue='35,78'/>
-              <CardStock symbol='LREN3' stockName='Lojas Renner' stockValue='22,45'/>
-              <CardStock symbol='GNDI3' stockName='NotreDame' stockValue='48,56'/>
-              <CardStock symbol='NTCO3' stockName='Natura' stockValue='55,78'/>
-              <CardStock symbol='RENT3' stockName='Localiza' stockValue='32,45'/>
-              <CardStock symbol='IRBR3' stockName='IRB' stockValue='12,56'/>
-              <CardStock symbol='CSNA3' stockName='CSN' stockValue='45,78'/>
-              <CardStock symbol='BRML3' stockName='BR Malls' stockValue='8,45'/>
-              <CardStock symbol='CVCB3' stockName='CVC' stockValue='18,56'/>
-              <CardStock symbol='GOLL4' stockName='Gol' stockValue='22,78'/>
-              <CardStock symbol='VVAR3' stockName='Via Varejo' stockValue='12,45'/> 
+              <CardStock symbol='PETR4' stockName='Petrobras' stockValue='28,45' qtd='10'/>
+              <CardStock symbol='VALE3' stockName='Vale' stockValue='45,32' qtd='20'/>
+              <CardStock symbol='VVAR3' stockName='Via Varejo' stockValue='12,45' qtd='32'/>
+              <CardStock symbol='MGLU3' stockName='Magazine Luiza' stockValue='23,12' qtd='5'/>
+              <CardStock symbol='ITUB4' stockName='Itaú' stockValue='32,45' qtd='15'/>
+              <CardStock symbol='BBDC4' stockName='Bradesco' stockValue='22,32' qtd='25'/>
+              <CardStock symbol='BBAS3' stockName='Banco do Brasil' stockValue='45,32' qtd='10'/>
+              <CardStock symbol='B3SA3' stockName='B3' stockValue='23,45' qtd='30'/>
+              <CardStock symbol='PETR4' stockName='Petrobras' stockValue='28,45' qtd='10'/>
+              <CardStock symbol='VALE3' stockName='Vale' stockValue='45,32' qtd='20'/>
+              <CardStock symbol='VVAR3' stockName='Via Varejo' stockValue='12,45' qtd='32'/>
+              <CardStock symbol='MGLU3' stockName='Magazine Luiza' stockValue='23,12' qtd='5'/>
+              <CardStock symbol='ITUB4' stockName='Itaú' stockValue='32,45' qtd='15'/>
+              <CardStock symbol='BBDC4' stockName='Bradesco' stockValue='22,32' qtd='25'/>
+              <CardStock symbol='BBAS3' stockName='Banco do Brasil' stockValue='45,32' qtd='10'/>
+              <CardStock symbol='B3SA3' stockName='B3' stockValue='23,45' qtd='30'/>
+              <CardStock symbol='PETR4' stockName='Petrobras' stockValue='28,45' qtd='10'/>
+              <CardStock symbol='VALE3' stockName='Vale' stockValue='45,32' qtd='20'/>
+              <CardStock symbol='VVAR3' stockName='Via Varejo' stockValue='12,45' qtd='32'/>
+              <CardStock symbol='MGLU3' stockName='Magazine Luiza' stockValue='23,12' qtd='5'/>
+              <CardStock symbol='ITUB4' stockName='Itaú' stockValue='32,45' qtd='15'/>
+              <CardStock symbol='BBDC4' stockName='Bradesco' stockValue='22,32' qtd='25'/>
+              <CardStock symbol='BBAS3' stockName='Banco do Brasil' stockValue='45,32' qtd='10'/>
+              <CardStock symbol='B3SA3' stockName='B3' stockValue='23,45' qtd='30'/>
+
             </div>
           </div>
         </div>
