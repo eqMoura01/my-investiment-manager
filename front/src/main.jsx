@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Login from './pages/login-screen/Login.jsx';
 import './index.css';
-
+import Login from './pages/login-screen/Login.jsx';
+import Home from './pages/home/Home.jsx';
+import StockPurchase from './pages/stock-purchase/StockPurchase.jsx';
 // Importa o react-router-dom
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-
-import StockForm from './pages/StockForm.jsx';
-import Home from './pages/home/Home.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,8 +20,8 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/StockForm",
-    element: <StockForm />,
+    path: "/stock-purchase",
+    element: <StockPurchase />,
   },
 ]);
 

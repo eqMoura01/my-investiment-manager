@@ -9,7 +9,7 @@ const Header = () => {
             </a>
             <div className='selector'>
                 <a href='/acoes' className='header-text' >Ações</a>
-                <a href='/compras' className='header-text' >Compras</a>
+                <a href='/stock-purchase' className='header-text' >Compras</a>
             </div>
         </header>
     );
