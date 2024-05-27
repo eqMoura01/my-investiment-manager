@@ -10,15 +10,20 @@ import {
 } from "react-router-dom";
 
 import StockForm from './pages/StockForm.jsx';
+import Home from './pages/home/Home.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element:  <Login/>,
+    element: <Login />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
   },
   {
     path: "/StockForm",
-    element: <StockForm/>,
+    element: <StockForm />,
   },
 ]);
 

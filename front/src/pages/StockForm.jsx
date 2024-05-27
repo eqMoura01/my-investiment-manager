@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { stockApi, userApi } from "../service/api"
+import { useState } from "react";
+import { stockApi } from "../service/api";
 
 const StockForm = () => {
 
