@@ -62,33 +62,3 @@
     display: none;
     /* Esconde a barra de rolagem nos navegadores que usam Chromium */
 }
-
-.card-stock {
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(81, 0, 185, 0.63);
-    width: 100px;
-    height: 120px;
-    min-width: 100px;
-    box-shadow: 3px 3px 3px rgba(251, 111, 249, 0.39);
-    border-radius: 8px;
-    gap: 16px;
-    padding: 6px;
-}
-
-
-
-.stock-symbol {
-    font-size: 24px;
-    text-align: center;
-}
-
-.stock-name {
-    font-size: 16px;
-    text-align: center;
-}
-
-.stock-value {
-    font-size: 16px;
-    text-align: center;
-}
