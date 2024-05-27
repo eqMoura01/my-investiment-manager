@@ -42,7 +42,7 @@ const Home = () => {
               <CardStock symbol='BRML3' stockName='BR Malls' stockValue='8,45'/>
               <CardStock symbol='CVCB3' stockName='CVC' stockValue='18,56'/>
               <CardStock symbol='GOLL4' stockName='Gol' stockValue='22,78'/>
-              <CardStock symbol='VVAR3' stockName='Via Varejo' stockValue='12,45'/>
+              <CardStock symbol='VVAR3' stockName='Via Varejo' stockValue='12,45'/> 
             </div>
           </div>
         </div>
