@@ -25,6 +25,7 @@
 .header-text {
     background: linear-gradient(#FF69B4, 65%, #FFFFFF);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 24px;
 }
