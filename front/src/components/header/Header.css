@@ -5,7 +5,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 32px;
-    border-bottom: 1px solid #e0e0e0;
     background-color: #0A0619;
 }
 
@@ -23,7 +22,7 @@
 }
 
 .header-text {
-    background: linear-gradient(#FF69B4, 65%, #FFFFFF);
+    background: linear-gradient(#FA00FF, 55%, #FFFFFF);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
