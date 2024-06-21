@@ -15,7 +15,7 @@ import com.mim.myinvestimentmanager.service.interfaces.StockService;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
-public class StockServiceImpl implements StockService{
+public class StockServiceImpl implements StockService {
 
     @Autowired
     private StockRepository stockRepository;
@@ -47,7 +47,7 @@ public class StockServiceImpl implements StockService{
 
         if (Objects.nonNull(object)) {
             BeanUtils.copyProperties(object, stock);
-            
+
             this.stockRepository.save(object);
         }
 
@@ -60,5 +60,16 @@ public class StockServiceImpl implements StockService{
 
         this.stockRepository.deleteById(id);
     }
-    
+
+    @Override
+    public List<Stock> saveAll(List<Stock> list) {
+        for (Stock stock : list) {
+            if (!stock.getStock().endsWith("F")) {
+                this.save(stock);
+            }
+        }
+
+        return this.stockRepository.saveAll(list);
+    }
+
 }

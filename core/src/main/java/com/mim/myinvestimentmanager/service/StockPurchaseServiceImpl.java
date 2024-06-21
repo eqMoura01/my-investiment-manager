@@ -61,4 +61,10 @@ public class StockPurchaseServiceImpl implements StockPurchaseService {
         this.stockPurchaseRepository.deleteById(id);
     }
 
+    @Override
+    public List<StockPurchase> saveAll(List<StockPurchase> list) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'saveAll'");
+    }
+
 }

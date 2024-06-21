@@ -13,5 +13,5 @@ public interface DefaultCrud<T> {
 
     void deleteById(Long id);
 
-    // List<T> saveAll(List<T> list);
+    List<T> saveAll(List<T> list);
 }

@@ -60,5 +60,11 @@ public class UserServiceImpl implements UserService{
 
         this.userRepository.deleteById(id);
     }
+
+    @Override
+    public List<User> saveAll(List<User> list) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'saveAll'");
+    }
     
 }

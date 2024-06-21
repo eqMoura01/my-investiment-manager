@@ -17,7 +17,7 @@ public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String symbol;
-    private String companyName;
-    private String sector;
-} 
+    private String stock;
+    private String name;
+    private Double close;
+}

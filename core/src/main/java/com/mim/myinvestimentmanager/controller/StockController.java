@@ -29,6 +29,12 @@ public class StockController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.stockService.save(object));
     }
 
+    @PostMapping("/savelist")
+    public ResponseEntity<List<Stock>> saveAll(@RequestBody List<Stock> stockList) {
+        return ResponseEntity.ok().body(this.stockService.saveAll(stockList));
+    }
+    
+
     @GetMapping
     public ResponseEntity<List<Stock>> listAll(){
         return ResponseEntity.ok().body(this.stockService.list());
