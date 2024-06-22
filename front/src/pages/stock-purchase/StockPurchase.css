@@ -92,3 +92,11 @@
     background-color: white;
     color: #7000FF;
 }
+
+.input-label select{
+    width: 100%;
+    color: #000000;
+    background-color: white;
+    padding: 8px;
+    border-radius: 4px;
+}
