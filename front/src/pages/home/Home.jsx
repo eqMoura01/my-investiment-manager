@@ -14,14 +14,17 @@ const Home = () => {
     const fetchData = async () => {
       const response = await stockPurchaseApi.get('http://localhost:8080/stockPurchase');
       setPurchasedStocks(response.data);
-      console.log(response.data)
-      setTotalValue(purchasedStocks.map(stock => stock.stockValue * stock.quantity).reduce((acc, curr) => acc + curr));
-      console.log(totalValue)
+
+      if (response.data.length > 0) {
+        let total = 0;
+        response.data.forEach(stock => {
+          total += stock.stockValue * stock.quantity;
+        });
+        setTotalValue(total.toFixed(2));
+      }
     };
     fetchData();
   }, []);
-
-  
 
   return (
     <div className="home">
@@ -33,8 +36,8 @@ const Home = () => {
             <span className="wallet-label">
               Valor da carteira em ações:
             </span><br />
-            <span className="wallet-value">
-              R$ {totalValue}
+            <span className="wallet-value" id="wallet-value">
+              {purchasedStocks.length > 0 ? `R$ ${totalValue}` : `Carregando dados...`}
             </span>
           </div>
 

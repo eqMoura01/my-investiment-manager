@@ -9,7 +9,6 @@ const CardStock = (props) => {
     const [stockPurchase, setStockPurchase] = useState([])
 
     const handleClick = (stockPurchase) => {
-        console.log(stockPurchase);
         navigate(`/stock-purchase/${stockPurchase.id}`, { state: { stockPurchase } });
         setStockPurchase(stockPurchase);
     }

@@ -10,7 +10,6 @@ const StockPurchase = () => {
 
     const location = useLocation();
     const stockPurchase = location.state ? location.state.stockPurchase : null;
-    console.log(stockPurchase);
 
     const [stocks, setStocks] = useState([]);
     const navigate = useNavigate();
@@ -64,7 +63,6 @@ const StockPurchase = () => {
 
         if (stockPurchase) {
             try {
-                console.log(`entrou em 1`)
                 formData.id = stockPurchase.id;
                 stockPurchaseApi.put(`http://localhost:8080/stockPurchase/${stockPurchase.id}`, formData)
                 navigate('/home');
@@ -75,7 +73,6 @@ const StockPurchase = () => {
         }
         else {
             try {
-                console.log(`entrou em 2`)
                 stockPurchaseApi.post('http://localhost:8080/stockPurchase', formData)
                 navigate('/home');
             } catch (error) {
