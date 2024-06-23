@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-// API 1 = Usuarios
-// API 2 = Ações
 
 const userApi = axios.create({
     baseURL: "http://localhost:8080/user"

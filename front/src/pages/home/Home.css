@@ -62,3 +62,19 @@
     display: none;
     /* Esconde a barra de rolagem nos navegadores que usam Chromium */
 }
+
+.remove-icon {
+    align-self: center;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.card-stock-teste {
+    position: relative;
+    width: 125px;
+    height: 160px;
+}

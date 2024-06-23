@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import removeIcon from '../../assets/remove.png';
 import CardStock from "../../components/card-stock/CardStock";
 import Header from "../../components/header/Header";
-import './Home.css';
-import { useState } from "react";
 import { stockPurchaseApi } from "../../service/api";
+import './Home.css';
 
 const Home = () => {
 
@@ -26,31 +26,43 @@ const Home = () => {
     fetchData();
   }, []);
 
+  const handleDelete = (stockId) => {
+    const fetchData = async () => {
+      const response = await stockPurchaseApi.delete(`http://localhost:8080/stockPurchase/${stockId}`);
+      console.log(response)
+
+      if (response.status === 200) {
+        setPurchasedStocks(purchasedStocks.filter((purchase) => purchase.id !== stockId));
+      }
+    };
+    fetchData();
+  }
+
   return (
     <div className="home">
       <Header />
       <div className="container-home">
         <div className="container-carteira">
           <div>
-            {/* Texto acima do container */}
             <span className="wallet-label">
               Valor da carteira em ações:
             </span><br />
             <span className="wallet-value" id="wallet-value">
-              {purchasedStocks.length > 0 ? `R$ ${totalValue}` : `Carregando dados...`}
+              {purchasedStocks.length > 0 ? `R$ ${totalValue}` : `R$ 0`}
             </span>
           </div>
 
-          {/* Container */}
           <div className="container-stocks">
             <span className="label-stocks">
               Ações compradas
             </span>
 
             <div className="cards-row">
-              {/* TODO: Criar componente para o card de ação */}
               {purchasedStocks.map(stock => (
-                <CardStock key={stock.id} id={stock.id} symbol={stock.symbol} stockName={stock.companyName} stockValue={stock.stockValue} qtd={stock.quantity} />
+                <div key={stock.id} className="card-stock-teste">
+                  <CardStock id={stock.id} symbol={stock.symbol} stockName={stock.companyName} stockValue={stock.stockValue} qtd={stock.quantity} />
+                  <img className="remove-icon" src={removeIcon} onClick={() => handleDelete(stock.id)} />
+                </div>
               ))}
             </div>
           </div>

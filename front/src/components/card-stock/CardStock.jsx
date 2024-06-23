@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './CardStock.css';
 
 const CardStock = (props) => {
@@ -13,8 +13,8 @@ const CardStock = (props) => {
         setStockPurchase(stockPurchase);
     }
 
-
     return (
+
         <div className="card-stock" onClick={() => handleClick(props)}>
             <span className="stock-symbol">
                 {props.symbol}
