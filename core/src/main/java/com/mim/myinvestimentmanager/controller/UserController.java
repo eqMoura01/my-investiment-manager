@@ -19,7 +19,7 @@ import com.mim.myinvestimentmanager.service.interfaces.UserService;
 
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/auth")
 public class UserController {
     
     @Autowired

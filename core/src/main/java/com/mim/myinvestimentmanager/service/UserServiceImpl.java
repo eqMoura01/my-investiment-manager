@@ -15,14 +15,14 @@ import com.mim.myinvestimentmanager.service.interfaces.UserService;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
 
     @Override
-    public User save(User object) {
-        return this.userRepository.save(object);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService{
         Optional<User> user = this.userRepository.findById(id);
 
         if (!user.isPresent()) {
-            throw new EntityNotFoundException("O USUARIO COM ID " + id + " NÃO FOI ENCONTRADO.");
+            throw new EntityNotFoundException("O USUÁRIO COM ID " + id + " NÃO FOI ENCONTRADO.");
         }
 
         return user.get();
@@ -43,28 +43,40 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User update(User object) {
-        User usuario = this.searchById(object.getId());
+        User existingUser = this.searchById(object.getId());
 
-        if (Objects.nonNull(object)) {
-            BeanUtils.copyProperties(object, usuario);
-            
-            this.userRepository.save(object);
+        if (Objects.nonNull(existingUser)) {
+            BeanUtils.copyProperties(object, existingUser, "id"); // Copia todas as propriedades exceto o ID
+            return this.userRepository.save(existingUser);
         }
 
-        return object;
+        return null;
     }
 
     @Override
     public void deleteById(Long id) {
         this.searchById(id);
-
         this.userRepository.deleteById(id);
     }
 
     @Override
     public List<User> saveAll(List<User> list) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveAll'");
+        return this.userRepository.saveAll(list);
     }
-    
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User authenticate(String email, String password) {
+        User user = findByEmail(email);
+
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+
+        return null;
+    }
 }
