@@ -1,5 +1,6 @@
 package com.mim.myinvestimentmanager.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -63,13 +64,15 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public List<Stock> saveAll(List<Stock> list) {
+
+        List<Stock> validStocks = new ArrayList<>();
         for (Stock stock : list) {
             if (!stock.getStock().endsWith("F")) {
-                this.save(stock);
+                validStocks.add(stock);
             }
         }
 
-        return this.stockRepository.saveAll(list);
+        return this.stockRepository.saveAll(validStocks);
     }
 
 }

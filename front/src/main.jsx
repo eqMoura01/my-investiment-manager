@@ -22,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/stock-purchase",
     element: <StockPurchase />,
+  }, 
+  {
+    path: "/stock-purchase/:id",
+    element: <StockPurchase />,
   },
 ]);
 

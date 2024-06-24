@@ -39,7 +39,7 @@ public class StockPurchaseController {
         return ResponseEntity.ok().body(this.stockPurchaseService.searchById(id));
     }
 
-    @PutMapping 
+    @PutMapping("/{id}")
     public ResponseEntity<StockPurchase> update(@RequestBody StockPurchase object) {
         return ResponseEntity.ok().body(this.stockPurchaseService.update(object));
     }

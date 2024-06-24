@@ -1,56 +1,69 @@
+import React, { useEffect, useState } from "react";
+import removeIcon from '../../assets/remove.png';
 import CardStock from "../../components/card-stock/CardStock";
 import Header from "../../components/header/Header";
+import { stockPurchaseApi } from "../../service/api";
 import './Home.css';
 
 const Home = () => {
+
+  const [purchasedStocks, setPurchasedStocks] = useState([])
+  const [totalValue, setTotalValue] = useState(0)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await stockPurchaseApi.get('http://localhost:8080/stockPurchase');
+      setPurchasedStocks(response.data);
+
+      if (response.data.length > 0) {
+        let total = 0;
+        response.data.forEach(stock => {
+          total += stock.stockValue * stock.quantity;
+        });
+        setTotalValue(total.toFixed(2));
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleDelete = (stockId) => {
+    const fetchData = async () => {
+      const response = await stockPurchaseApi.delete(`http://localhost:8080/stockPurchase/${stockId}`);
+      console.log(response)
+
+      if (response.status === 200) {
+        setPurchasedStocks(purchasedStocks.filter((purchase) => purchase.id !== stockId));
+      }
+    };
+    fetchData();
+  }
+
   return (
     <div className="home">
       <Header />
       <div className="container-home">
         <div className="container-carteira">
           <div>
-            {/* Texto acima do container */}
             <span className="wallet-label">
               Valor da carteira em ações:
             </span><br />
-            <span className="wallet-value">
-              R$ 743,21
+            <span className="wallet-value" id="wallet-value">
+              {purchasedStocks.length > 0 ? `R$ ${totalValue}` : `R$ 0`}
             </span>
           </div>
 
-          {/* Container */}
           <div className="container-stocks">
             <span className="label-stocks">
               Ações compradas
             </span>
 
             <div className="cards-row">
-              {/* TODO: Criar componente para o card de ação */}
-              <CardStock symbol='PETR4' stockName='Petrobras' stockValue='28,45' qtd='10'/>
-              <CardStock symbol='VALE3' stockName='Vale' stockValue='45,32' qtd='20'/>
-              <CardStock symbol='VVAR3' stockName='Via Varejo' stockValue='12,45' qtd='32'/>
-              <CardStock symbol='MGLU3' stockName='Magazine Luiza' stockValue='23,12' qtd='5'/>
-              <CardStock symbol='ITUB4' stockName='Itaú' stockValue='32,45' qtd='15'/>
-              <CardStock symbol='BBDC4' stockName='Bradesco' stockValue='22,32' qtd='25'/>
-              <CardStock symbol='BBAS3' stockName='Banco do Brasil' stockValue='45,32' qtd='10'/>
-              <CardStock symbol='B3SA3' stockName='B3' stockValue='23,45' qtd='30'/>
-              <CardStock symbol='PETR4' stockName='Petrobras' stockValue='28,45' qtd='10'/>
-              <CardStock symbol='VALE3' stockName='Vale' stockValue='45,32' qtd='20'/>
-              <CardStock symbol='VVAR3' stockName='Via Varejo' stockValue='12,45' qtd='32'/>
-              <CardStock symbol='MGLU3' stockName='Magazine Luiza' stockValue='23,12' qtd='5'/>
-              <CardStock symbol='ITUB4' stockName='Itaú' stockValue='32,45' qtd='15'/>
-              <CardStock symbol='BBDC4' stockName='Bradesco' stockValue='22,32' qtd='25'/>
-              <CardStock symbol='BBAS3' stockName='Banco do Brasil' stockValue='45,32' qtd='10'/>
-              <CardStock symbol='B3SA3' stockName='B3' stockValue='23,45' qtd='30'/>
-              <CardStock symbol='PETR4' stockName='Petrobras' stockValue='28,45' qtd='10'/>
-              <CardStock symbol='VALE3' stockName='Vale' stockValue='45,32' qtd='20'/>
-              <CardStock symbol='VVAR3' stockName='Via Varejo' stockValue='12,45' qtd='32'/>
-              <CardStock symbol='MGLU3' stockName='Magazine Luiza' stockValue='23,12' qtd='5'/>
-              <CardStock symbol='ITUB4' stockName='Itaú' stockValue='32,45' qtd='15'/>
-              <CardStock symbol='BBDC4' stockName='Bradesco' stockValue='22,32' qtd='25'/>
-              <CardStock symbol='BBAS3' stockName='Banco do Brasil' stockValue='45,32' qtd='10'/>
-              <CardStock symbol='B3SA3' stockName='B3' stockValue='23,45' qtd='30'/>
-
+              {purchasedStocks.map(stock => (
+                <div key={stock.id} className="card-stock-teste">
+                  <CardStock id={stock.id} symbol={stock.symbol} stockName={stock.companyName} stockValue={stock.stockValue} qtd={stock.quantity} />
+                  <img className="remove-icon" src={removeIcon} onClick={() => handleDelete(stock.id)} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
