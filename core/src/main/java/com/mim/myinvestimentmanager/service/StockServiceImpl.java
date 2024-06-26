@@ -75,4 +75,6 @@ public class StockServiceImpl implements StockService {
         return this.stockRepository.saveAll(validStocks);
     }
 
+    
+
 }

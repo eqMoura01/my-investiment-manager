@@ -21,50 +21,46 @@ public class StockPurchaseServiceImpl implements StockPurchaseService {
     private StockPurchaseRepository stockPurchaseRepository;
 
     @Override
-    public StockPurchase save(StockPurchase object) {
-        return this.stockPurchaseRepository.save(object);
+    public StockPurchase save(StockPurchase stockPurchase) {
+        return this.stockPurchaseRepository.save(stockPurchase);
     }
 
     @Override
-    public List<StockPurchase> list() {
-        return this.stockPurchaseRepository.findAll();
+    public List<StockPurchase> listByUserId(Long userId) {
+        return this.stockPurchaseRepository.findByUserId(userId);
     }
 
     @Override
-    public StockPurchase searchById(Long id) {
-        Optional<StockPurchase> stock = this.stockPurchaseRepository.findById(id);
-
-        if (!stock.isPresent()) {
-            throw new EntityNotFoundException("O USUARIO COM ID " + id + " NÃO FOI ENCONTRADO.");
+    public StockPurchase findByIdAndUserId(Long id, Long userId) {
+        Optional<StockPurchase> optionalStockPurchase = this.stockPurchaseRepository.findByIdAndUserId(id, userId);
+        if (optionalStockPurchase.isPresent()) {
+            return optionalStockPurchase.get();
         }
-
-        return stock.get();
+        throw new EntityNotFoundException("Compra de ação não encontrada para o usuário com ID " + userId);
     }
 
     @Override
-    public StockPurchase update(StockPurchase object) {
-        StockPurchase stockPurchase = this.searchById(object.getId());
-
-        if (Objects.nonNull(object)) {
-            BeanUtils.copyProperties(object, stockPurchase);
-            
-            this.stockPurchaseRepository.save(object);
+    public StockPurchase update(StockPurchase stockPurchase) {
+        StockPurchase existingStockPurchase = this.findByIdAndUserId(stockPurchase.getId(), stockPurchase.getUserId());
+        if (Objects.nonNull(existingStockPurchase)) {
+            BeanUtils.copyProperties(stockPurchase, existingStockPurchase);
+            this.stockPurchaseRepository.save(existingStockPurchase);
         }
-
-        return object;
+        return existingStockPurchase;
     }
 
     @Override
-    public void deleteById(Long id) {
-        this.searchById(id);
-
-        this.stockPurchaseRepository.deleteById(id);
+    public void deleteByIdAndUserId(Long id, Long userId) {
+        Optional<StockPurchase> optionalStockPurchase = this.stockPurchaseRepository.findByIdAndUserId(id, userId);
+        if (optionalStockPurchase.isPresent()) {
+            this.stockPurchaseRepository.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("Compra de ação não encontrada para o usuário com ID " + userId);
+        }
     }
 
     @Override
     public List<StockPurchase> saveAll(List<StockPurchase> list) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveAll'");
+        return this.stockPurchaseRepository.saveAll(list);
     }
-
 }

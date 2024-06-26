@@ -1,0 +1,18 @@
+
+.Home{
+    display: flex;
+    flex-direction: column;
+    background-color: #170133;
+    width: 100vw;
+    height: 100vh;
+    color: black;
+}
+
+
+.user-config {
+    display: flex;
+    max-width: 30rem;
+    max-height: 50rem;
+    transform: translate(150%, 10%);
+}
+

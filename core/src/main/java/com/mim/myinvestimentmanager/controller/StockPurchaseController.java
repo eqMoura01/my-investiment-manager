@@ -24,31 +24,35 @@ public class StockPurchaseController {
     @Autowired
     private StockPurchaseService stockPurchaseService;
 
-    @PostMapping
-    public ResponseEntity<StockPurchase> save(@RequestBody StockPurchase object){
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.stockPurchaseService.save(object));
+    @PostMapping("/{userId}")
+    public ResponseEntity<StockPurchase> save(@PathVariable Long userId, @RequestBody StockPurchase stockPurchase) {
+        stockPurchase.setUserId(userId); // Define o ID do usuário na compra
+        StockPurchase savedStockPurchase = stockPurchaseService.save(stockPurchase);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedStockPurchase);
     }
 
-    @GetMapping
-    public ResponseEntity<List<StockPurchase>> listAll(){
-        return ResponseEntity.ok().body(this.stockPurchaseService.list());
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<StockPurchase>> listByUserId(@PathVariable Long userId) {
+        List<StockPurchase> stockPurchases = stockPurchaseService.listByUserId(userId);
+        return ResponseEntity.ok().body(stockPurchases);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<StockPurchase> findById(@PathVariable Long id){
-        return ResponseEntity.ok().body(this.stockPurchaseService.searchById(id));
+    @GetMapping("/{userId}/{id}")
+    public ResponseEntity<StockPurchase> findByIdAndUserId(@PathVariable Long userId, @PathVariable Long id) {
+        StockPurchase stockPurchase = stockPurchaseService.findByIdAndUserId(id, userId);
+        return ResponseEntity.ok().body(stockPurchase);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<StockPurchase> update(@RequestBody StockPurchase object) {
-        return ResponseEntity.ok().body(this.stockPurchaseService.update(object));
+    @PutMapping("/{userId}/{id}")
+    public ResponseEntity<StockPurchase> update(@PathVariable Long userId, @RequestBody StockPurchase stockPurchase) {
+        stockPurchase.setUserId(userId); // Define o ID do usuário na compra
+        StockPurchase updatedStockPurchase = stockPurchaseService.update(stockPurchase);
+        return ResponseEntity.ok().body(updatedStockPurchase);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        this.stockPurchaseService.deleteById(id);
-
+    @DeleteMapping("/{userId}/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long userId, @PathVariable Long id) {
+        stockPurchaseService.deleteByIdAndUserId(id, userId);
         return ResponseEntity.ok().build();
     }
-
 }

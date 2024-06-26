@@ -6,13 +6,22 @@ import LoginButton from '../login-button/LoginButton';
 import './LoginForm.css';
 
 const LoginForm = () => {
-  const [isLoginForm, setIsLoginForm] = useState(true);
+  const [isLoginForm, setIsLoginForm] = useState(false);
   const [showPasswordLogin, setShowPasswordLogin] = useState(false);
   const [showPasswordSignup, setShowPasswordSignup] = useState(false);
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
+  const [signupData, setSignupData] = useState({ name: '', email: '', password: '' });
+  const [loginError, setLoginError] = useState('');
+  const [signupError, setSignupError] = useState('');
+
   const navigate = useNavigate();
 
   const flip = () => {
     setIsLoginForm(!isLoginForm);
+    setLoginData({ email: '', password: '' }); // Clear login data
+    setSignupData({ name: '', email: '', password: '' }); // Clear signup data
+    setLoginError(''); // Clear login error
+    setSignupError(''); // Clear signup error
   };
 
   const togglePasswordLogin = () => {
@@ -23,30 +32,56 @@ const LoginForm = () => {
     setShowPasswordSignup(!showPasswordSignup);
   };
 
-  const handleSubmit = async (event) => {
+  const handleInputChange = (event, formType) => {
+    const { name, value } = event.target;
+    if (formType === 'login') {
+      setLoginData({ ...loginData, [name]: value });
+    } else {
+      setSignupData({ ...signupData, [name]: value });
+    }
+  };
+
+  const handleLoginSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
-    const data = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
-
-    const url = isLoginForm ? 'http://localhost:8080/user/login' : 'http://localhost:8080/user/signup';
+    const url = 'http://localhost:8080/user/login';
 
     try {
-      const response = await axios.post(url, data, {
+      const response = await axios.post(url, loginData, {
         headers: {
           'Content-Type': 'application/json'
         }
       });
-      console.log('Login/Signup successful:', response.data);
 
-      // Redirect to home page or desired page
+      console.log('Login successful:', response.data);
+
+      const userId = response.data.userId;
+      localStorage.setItem('userId', userId);
+
       navigate('/home');
     } catch (error) {
-      console.error('Login/Signup error:', error.response ? error.response.data : error.message);
-      // Handle error (e.g., show error message)
+      console.error('Login error:', error.response ? error.response.data : error.message);
+      setLoginError('Usuário ou senha incorretos'); // Set login error message
+    }
+  };
+
+  const handleSignupSubmit = async (event) => {
+    event.preventDefault();
+
+    const url = 'http://localhost:8080/user/signup';
+
+    try {
+      const response = await axios.post(url, signupData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log('Signup successful:', response.data);
+      setIsLoginForm(true);
+    } catch (error) {
+      console.error('Signup error:', error.response ? error.response.data : error.message);
+      setSignupError('Erro ao registrar. Por favor, tente novamente.'); // Set signup error message
     }
   };
 
@@ -57,14 +92,35 @@ const LoginForm = () => {
         {isLoginForm ? (
           <div className="box-login">
             <ul>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleLoginSubmit}>
                 <h1 className="typewriter">LOGIN</h1>
+                {loginError && <p className="error-message" color='red'>{loginError}</p>}
                 <div className="email-login">
-                  <LoginInput className="inpt" type="email" name="email" id="email-login" placeholder="Email" color="white" required />
+                  <LoginInput 
+                    className="inpt" 
+                    type="email" 
+                    name="email" 
+                    id="email-login" 
+                    placeholder="Email" 
+                    color="white" 
+                    value={loginData.email}
+                    onChange={(e) => handleInputChange(e, 'login')}
+                    required 
+                  />
                   <i className='fa fa-envelope'></i>
                 </div>
                 <div className="password-login">
-                  <LoginInput className="inpt" type={showPasswordLogin ? "text" : "password"} name="password" id="password-login" placeholder="Password" color="white" required />
+                  <LoginInput 
+                    className="inpt" 
+                    type={showPasswordLogin ? "text" : "password"} 
+                    name="password" 
+                    id="password-login" 
+                    placeholder="Password" 
+                    color="white" 
+                    value={loginData.password}
+                    onChange={(e) => handleInputChange(e, 'login')}
+                    required 
+                  />
                   <i id="eye-login" className={`fa ${showPasswordLogin ? "fa-eye" : "fa-eye-slash"}`} onClick={togglePasswordLogin}></i>
                 </div>
                 <div className="forget">
@@ -82,18 +138,49 @@ const LoginForm = () => {
         ) : (
           <div className="box-signup">
             <ul>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSignupSubmit}>
                 <h1 className="typewriter">SIGN UP</h1>
+                {signupError && <p className="error-message">{signupError}</p>}
                 <div className="user-signup">
-                  <LoginInput className="inpt" type="text" name="name" id="username" placeholder="User Name" color="white" required />
+                  <LoginInput 
+                    className="inpt" 
+                    type="text" 
+                    name="name" 
+                    id="username" 
+                    placeholder="User Name" 
+                    color="white" 
+                    value={signupData.name}
+                    onChange={(e) => handleInputChange(e, 'signup')}
+                    required 
+                  />
                   <i className="fa fa-user"></i>
                 </div>
                 <div className="email-signup">
-                  <LoginInput className="inpt" type="email" name="email" id="email-signup" placeholder="Email" color="white" required />
+                  <LoginInput 
+                    className="inpt" 
+                    type="email" 
+                    name="email" 
+                    id="email-signup" 
+                    placeholder="Email" 
+                    color="white" 
+                    value={signupData.email}
+                    onChange={(e) => handleInputChange(e, 'signup')}
+                    required 
+                  />
                   <i className='fa fa-envelope'></i>
                 </div>
                 <div className="password-signup">
-                  <LoginInput className="inpt" type={showPasswordSignup ? "text" : "password"} name="password" id="password-signup" placeholder="Password" color="white" required />
+                  <LoginInput 
+                    className="inpt" 
+                    type={showPasswordSignup ? "text" : "password"} 
+                    name="password" 
+                    id="password-signup" 
+                    placeholder="Password" 
+                    color="white" 
+                    value={signupData.password}
+                    onChange={(e) => handleInputChange(e, 'signup')}
+                    required 
+                  />
                   <i id="eye-signup" className={`fa ${showPasswordSignup ? "fa-eye" : "fa-eye-slash"}`} onClick={togglePasswordSignup}></i>
                 </div>
                 <div className="forget">

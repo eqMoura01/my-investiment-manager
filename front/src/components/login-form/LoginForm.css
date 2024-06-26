@@ -29,6 +29,12 @@
   background: transparent;
   outline: none;
 }
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
 
 .box-login {
   width: 100%;

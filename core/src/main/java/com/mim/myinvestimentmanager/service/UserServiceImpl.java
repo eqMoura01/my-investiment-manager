@@ -79,4 +79,16 @@ public class UserServiceImpl implements UserService {
 
         return null;
     }
+
+    @Override
+    public User findByIdAndReturnNameAndEmail(Long id) {
+    Optional<User> userOptional = userRepository.findById(id);
+    return userOptional.map(user -> {
+        User userProjection = new User();
+        userProjection.setName(user.getName());
+        userProjection.setEmail(user.getEmail());
+        return userProjection;
+    }).orElse(null);
+}
+
 }

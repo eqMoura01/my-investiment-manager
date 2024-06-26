@@ -29,6 +29,11 @@
     font-size: 24px;
 }
 
-a{
+.header-icon {
+    color: #FA00FF;
+    cursor: pointer;
+}
+
+a {
     cursor: pointer;
 }

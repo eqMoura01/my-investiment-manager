@@ -7,36 +7,42 @@ import './Home.css';
 
 const Home = () => {
 
-  const [purchasedStocks, setPurchasedStocks] = useState([])
-  const [totalValue, setTotalValue] = useState(0)
+  const [purchasedStocks, setPurchasedStocks] = useState([]);
+  const [totalValue, setTotalValue] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await stockPurchaseApi.get('http://localhost:8080/stockPurchase');
-      setPurchasedStocks(response.data);
+      try {
+        const userId = localStorage.getItem('userId');
+        const response = await stockPurchaseApi.get(`http://localhost:8080/stockPurchase/${userId}`);
+        setPurchasedStocks(response.data);
 
-      if (response.data.length > 0) {
-        let total = 0;
-        response.data.forEach(stock => {
-          total += stock.stockValue * stock.quantity;
-        });
-        setTotalValue(total.toFixed(2));
+        if (response.data.length > 0) {
+          let total = 0;
+          response.data.forEach(stock => {
+            total += stock.stockValue * stock.quantity;
+          });
+          setTotalValue(total.toFixed(2));
+        }
+      } catch (error) {
+        console.error("Erro ao buscar compras de ações:", error);
       }
     };
     fetchData();
-  }, []);
+  }, [purchasedStocks]);
 
-  const handleDelete = (stockId) => {
-    const fetchData = async () => {
-      const response = await stockPurchaseApi.delete(`http://localhost:8080/stockPurchase/${stockId}`);
-      console.log(response)
+  const handleDelete = async (stockId) => {
+    try {
+      const response = await stockPurchaseApi.delete(`http://localhost:8080/stockPurchase/${localStorage.getItem('userId')}/${stockId}`);
+      console.log(response);
 
       if (response.status === 200) {
         setPurchasedStocks(purchasedStocks.filter((purchase) => purchase.id !== stockId));
       }
-    };
-    fetchData();
-  }
+    } catch (error) {
+      console.error("Erro ao excluir compra de ação:", error);
+    }
+  };
 
   return (
     <div className="home">
@@ -61,7 +67,7 @@ const Home = () => {
               {purchasedStocks.map(stock => (
                 <div key={stock.id} className="card-stock-teste">
                   <CardStock id={stock.id} symbol={stock.symbol} stockName={stock.companyName} stockValue={stock.stockValue} qtd={stock.quantity} />
-                  <img className="remove-icon" src={removeIcon} onClick={() => handleDelete(stock.id)} />
+                  <img className="remove-icon" src={removeIcon} alt="Remove" onClick={() => handleDelete(stock.id)} />
                 </div>
               ))}
             </div>
@@ -70,6 +76,6 @@ const Home = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Home;

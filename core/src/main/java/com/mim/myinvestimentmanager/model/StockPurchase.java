@@ -17,6 +17,7 @@ public class StockPurchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long userId;
     private String symbol;
     private String companyName;
     private Integer quantity;
