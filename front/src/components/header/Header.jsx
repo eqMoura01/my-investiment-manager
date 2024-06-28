@@ -15,6 +15,7 @@ const Header = () => {
                 <a href='/user-page' className='header-icon'>
                     <FontAwesomeIcon icon={faUser} size="2x" />
                 </a>
+                <a href="/" className='header-text'>Sair</a>
             </div>
         </header>
     );

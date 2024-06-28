@@ -10,7 +10,7 @@ const Login = () => {
         <img src={bgImage} alt="Background" className="background-img" />
         <div className="left-column">
           <h1>Gerencie seus investimentos com <br /> facilidade e segurança!</h1>
-          <h2>Plataforma gratuita e muito mais para dar <br /> um up nos seus trades!</h2>
+          <h2>Plataforma gratuita e muito mais para dar <br /> um up no seu gerenciamento!</h2>
         </div>
         <div className="box">
           <LoginForm />

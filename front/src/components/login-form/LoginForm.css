@@ -5,6 +5,7 @@
   font-size: 2em;
   margin-bottom: 30px;
   font-weight: 700;
+  color: white;
 }
 
 
@@ -97,6 +98,7 @@
 .register-link {
   display: contents;
   flex-direction: row;
+  color: white;
 }
 
 form a:active {

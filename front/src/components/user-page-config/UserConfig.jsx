@@ -152,7 +152,7 @@ const UserPage = () => {
                         <InputField
                             type={showPasswordOld ? "text" : "password"}
                             name="password"
-                            placeholder="Old password"
+                            placeholder="Senha antiga"
                             color="white"
                             value={formData.password}
                             onChange={handleInputChange}
@@ -165,7 +165,7 @@ const UserPage = () => {
                         <InputField
                             type={showPasswordNew ? "text" : "password"}
                             name="newPassword"
-                            placeholder="New password"
+                            placeholder="Nova senha"
                             color="white"
                             value={formData.newPassword}
                             onChange={handleInputChange}
@@ -175,8 +175,8 @@ const UserPage = () => {
                         </div>
                     </div>
                     <div className="button-group">
-                        <LoginButton text="SAVE" buttonColor="white" textColor="black" type="submit" />
-                        <LoginButton text="Return" buttonColor="white" textColor="black" onClick={() => navigate('/home')} />
+                        <LoginButton text="Salvar" buttonColor="white" textColor="black" type="submit" />
+                        <LoginButton text="Cancelar" buttonColor="white" textColor="black" onClick={() => navigate('/home')} />
                     </div>
                 </form>
             </ul>

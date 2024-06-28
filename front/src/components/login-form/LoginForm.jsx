@@ -107,7 +107,7 @@ const LoginForm = () => {
                     type="email"
                     name="email"
                     id="email-login"
-                    placeholder="Email"
+                    placeholder="E-mail"
                     color="white"
                     value={loginData.email}
                     onChange={(e) => handleInputChange(e, 'login')}
@@ -121,7 +121,7 @@ const LoginForm = () => {
                     type={showPasswordLogin ? "text" : "password"}
                     name="password"
                     id="password-login"
-                    placeholder="Password"
+                    placeholder="Senha"
                     color="white"
                     value={loginData.password}
                     onChange={(e) => handleInputChange(e, 'login')}
@@ -132,7 +132,7 @@ const LoginForm = () => {
                 <LoginButton text="LOGIN" buttonColor="white" textColor="black" />
               </form>
               <div className="register-link">
-                <p>Don't have an account? <a href="#" onClick={flip}>Sign Up</a></p>
+                <p>Ainda não possui uma conta? <a href="#" onClick={flip}>Registrar</a></p>
               </div>
             </ul>
           </div>
@@ -140,14 +140,14 @@ const LoginForm = () => {
           <div className="box-signup">
             <ul>
               <form onSubmit={handleSignupSubmit}>
-                <h1 className="typewriter">SIGN UP</h1>
+                <h1 className="typewriter">Cadastro</h1>
                 <div className="user-signup">
                   <LoginInput
                     className="inpt"
                     type="text"
                     name="name"
                     id="username"
-                    placeholder="User Name"
+                    placeholder="Nome de usuário"
                     color="white"
                     value={signupData.name}
                     onChange={(e) => handleInputChange(e, 'signup')}
@@ -161,7 +161,7 @@ const LoginForm = () => {
                     type="email"
                     name="email"
                     id="email-signup"
-                    placeholder="Email"
+                    placeholder="E-mail"
                     color="white"
                     value={signupData.email}
                     onChange={(e) => handleInputChange(e, 'signup')}
@@ -175,7 +175,7 @@ const LoginForm = () => {
                     type={showPasswordSignup ? "text" : "password"}
                     name="password"
                     id="password-signup"
-                    placeholder="Password"
+                    placeholder="Senha"
                     color="white"
                     value={signupData.password}
                     onChange={(e) => handleInputChange(e, 'signup')}
@@ -183,10 +183,10 @@ const LoginForm = () => {
                   />
                   <i id="eye-signup" className={`fa ${showPasswordSignup ? "fa-eye" : "fa-eye-slash"}`} onClick={togglePasswordSignup}></i>
                 </div>
-                <LoginButton text="SIGN UP" buttonColor="white" textColor="black" />
+                <LoginButton text="Cadastrar" buttonColor="white" textColor="black" />
               </form>
               <div className="register-link">
-                <p>Already have an account? <a href="#" onClick={flip}>Log In</a></p>
+                <p>Já possui uma conta? <a href="#" onClick={flip}>Fazer Login</a></p>
               </div>
             </ul>
           </div>
