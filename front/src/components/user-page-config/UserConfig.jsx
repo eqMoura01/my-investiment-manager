@@ -16,7 +16,6 @@ const UserPage = () => {
 
     const [showPasswordOld, setShowPasswordOld] = useState(false);
     const [showPasswordNew, setShowPasswordNew] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -87,13 +86,12 @@ const UserPage = () => {
                 payload.password = formData.password;
                 payload.newPassword = formData.newPassword;
             } else if (formData.password || formData.newPassword) {
-                setErrorMessage('Por favor, preencha tanto a senha antiga quanto a nova.');
+                alert('Por favor, preencha tanto a senha antiga quanto a nova.');
                 return;
             }
     
-    
             if (formData.newPassword && !validatePassword(formData.newPassword)) {
-                setErrorMessage('A nova senha deve ter pelo menos 5 caracteres, uma letra maiúscula e um caractere especial.');
+                alert('A nova senha deve ter pelo menos 5 caracteres, uma letra maiúscula e um caractere especial.');
                 return;
             }
     
@@ -112,7 +110,7 @@ const UserPage = () => {
             }
         } catch (error) {
             console.error('Erro ao atualizar dados do usuário:', error);
-            setErrorMessage('Senha incorreta. Por favor, tente novamente.');
+            alert('Senha incorreta. Por favor, tente novamente.');
         }
     };
 
@@ -122,7 +120,6 @@ const UserPage = () => {
             <ul>
                 <form onSubmit={handleSubmit}>
                     <h1>User</h1>
-                    {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <div className="user-signup">
                         <InputField
                             type="text"

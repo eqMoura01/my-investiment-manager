@@ -11,8 +11,6 @@ const LoginForm = () => {
   const [showPasswordSignup, setShowPasswordSignup] = useState(false);
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [signupData, setSignupData] = useState({ name: '', email: '', password: '' });
-  const [loginError, setLoginError] = useState('');
-  const [signupError, setSignupError] = useState('');
 
   const navigate = useNavigate();
 
@@ -20,8 +18,6 @@ const LoginForm = () => {
     setIsLoginForm(!isLoginForm);
     setLoginData({ email: '', password: '' }); // Clear login data
     setSignupData({ name: '', email: '', password: '' }); // Clear signup data
-    setLoginError(''); // Clear login error
-    setSignupError(''); // Clear signup error
   };
 
   const togglePasswordLogin = () => {
@@ -53,7 +49,7 @@ const LoginForm = () => {
     const url = 'http://localhost:8080/user/signup';
 
     if (!validatePassword(signupData.password)) {
-      setSignupError('A senha deve ter pelo menos 5 caracteres, 1 letra maiúscula e 1 caractere especial.');
+      alert('A senha deve ter pelo menos 5 caracteres, 1 letra maiúscula e 1 caractere especial.');
       return;
     }
 
@@ -68,7 +64,7 @@ const LoginForm = () => {
       setIsLoginForm(true);
     } catch (error) {
       console.error('Signup error:', error.response ? error.response.data : error.message);
-      setSignupError('Erro ao registrar. Por favor, tente novamente.'); // Set signup error message
+      alert('Erro ao registrar. Por favor, tente novamente.');
     }
   };
 
@@ -92,7 +88,7 @@ const LoginForm = () => {
       navigate('/home');
     } catch (error) {
       console.error('Login error:', error.response ? error.response.data : error.message);
-      setLoginError('Usuário ou senha incorretos'); // Set login error message
+      alert('Usuário ou senha incorretos');
     }
   };
 
@@ -105,7 +101,6 @@ const LoginForm = () => {
             <ul>
               <form onSubmit={handleLoginSubmit}>
                 <h1 className="typewriter">LOGIN</h1>
-                {loginError && <p className="error-message" color='red'>{loginError}</p>}
                 <div className="email-login">
                   <LoginInput
                     className="inpt"
@@ -146,7 +141,6 @@ const LoginForm = () => {
             <ul>
               <form onSubmit={handleSignupSubmit}>
                 <h1 className="typewriter">SIGN UP</h1>
-                {signupError && <p className="error-message">{signupError}</p>}
                 <div className="user-signup">
                   <LoginInput
                     className="inpt"
