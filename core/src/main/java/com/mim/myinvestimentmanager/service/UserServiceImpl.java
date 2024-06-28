@@ -46,7 +46,8 @@ public class UserServiceImpl implements UserService {
         User existingUser = this.searchById(object.getId());
 
         if (Objects.nonNull(existingUser)) {
-            BeanUtils.copyProperties(object, existingUser, "id"); // Copia todas as propriedades exceto o ID
+            BeanUtils.copyProperties(object, existingUser, "id", "password");
+
             return this.userRepository.save(existingUser);
         }
 
@@ -82,13 +83,38 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByIdAndReturnNameAndEmail(Long id) {
-    Optional<User> userOptional = userRepository.findById(id);
-    return userOptional.map(user -> {
-        User userProjection = new User();
-        userProjection.setName(user.getName());
-        userProjection.setEmail(user.getEmail());
-        return userProjection;
-    }).orElse(null);
+        Optional<User> userOptional = userRepository.findById(id);
+        return userOptional.map(user -> {
+            User userProjection = new User();
+            userProjection.setName(user.getName());
+            userProjection.setEmail(user.getEmail());
+            return userProjection;
+        }).orElse(null);
+    }
+
+    @Override
+    public User updateUserDetails(User user, String oldPassword, String newPassword) {
+    User existingUser = this.searchById(user.getId());
+
+    if (Objects.nonNull(existingUser)) {
+        if (oldPassword != null && !existingUser.authenticate(oldPassword)) {
+            throw new IllegalArgumentException("Senha antiga incorreta.");
+        }
+
+        // Atualiza apenas se a nova senha não for nula e diferente da senha antiga
+        if (newPassword != null && !newPassword.equals(existingUser.getPassword())) {
+            existingUser.setPassword(newPassword);
+        }
+
+        // Atualiza nome e email
+        existingUser.setName(user.getName());
+        existingUser.setEmail(user.getEmail());
+
+        return this.userRepository.save(existingUser);
+    }
+
+    return null;
 }
+
 
 }

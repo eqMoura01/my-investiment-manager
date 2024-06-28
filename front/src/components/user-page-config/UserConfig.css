@@ -45,7 +45,6 @@ body {
 .formUser .password-signup {
   align-items: center;
   margin-bottom: 15px;
-  
 }
 
 .formUser .inpt {
@@ -60,11 +59,17 @@ body {
   border: 1px solid white;
   transition: 0.3s ease;
   transform: translateX(-10%);
-
 }
 
 .formUser .inpt:focus {
   border-color: blueviolet;
+}
+
+.formUser .icon-container {
+  position: absolute;
+  top: 1.9rem;
+  right: -3rem;
+  cursor: pointer;
 }
 
 .formUser i {
@@ -77,10 +82,68 @@ body {
   transition: 0.3s ease;
 }
 
-.formUser .fa-eye,
-.formUser .fa-eye-slash {
+.formUser i:hover {
+  color: blueviolet;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.login-button {
+  padding: 15px 40px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #eee;
+}
+.email-login {
+  position: relative;
+}
+
+.email-login .icon-container {
+  position: absolute;
+  top: 1.9rem;
+  right: -3.0rem;
   cursor: pointer;
 }
+
+.user-signup {
+  position: relative;
+}
+
+.user-signup .icon-container {
+  position: absolute;
+  top: 1.9rem;
+  right: -2.8rem;
+  cursor: pointer;
+}
+
+
+
+.password-signup {
+  position: relative;
+}
+
+.password-signup .icon-container {
+  position: absolute;
+  top: 1.9rem;
+  right: -3rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+
 
 .formUser i:hover {
   color: blueviolet;

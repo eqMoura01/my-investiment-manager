@@ -12,6 +12,7 @@ const StockPurchase = () => {
     const userId = localStorage.getItem('userId');
 
     const [stocks, setStocks] = useState([]);
+    const [filterLetter, setFilterLetter] = useState(''); // Estado para a letra de filtro
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         id: 0,
@@ -43,7 +44,8 @@ const StockPurchase = () => {
 
             try {
                 const response = await stockPurchaseApi.get('http://localhost:8080/stock');
-                setStocks(response.data);
+                const validStocks = response.data.filter(stock => stock && stock.stock); // Filtra valores nulos ou inválidos
+                setStocks(validStocks);
                 if (stockPurchase) {
                     document.getElementById('symbol').value = stockPurchase.symbol;
                 }
@@ -66,6 +68,10 @@ const StockPurchase = () => {
         document.getElementById('companyName').value = selectedStock ? selectedStock.name : '';
     };
 
+    const handleFilterChange = (event) => {
+        setFilterLetter(event.target.value);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -86,6 +92,8 @@ const StockPurchase = () => {
         return symbol && companyName && quantity > 0 && stockValue > 0;
     };
 
+    const filteredStocks = stocks.filter(stock => stock.stock.startsWith(filterLetter));
+
     return (
         <div className="stock-purchase">
             <Header />
@@ -94,9 +102,18 @@ const StockPurchase = () => {
                     <span style={{ fontSize: '32px', fontStyle: "italic" }} id="form-container-title">Cadastrar nova compra</span>
                     <div className="inputs">
                         <div className="input-label">
+                            <label htmlFor="filterLetter">Filtrar:</label>
+                            <select name="filterLetter" id="filterLetter" onChange={handleFilterChange}>
+                                <option value="">Todas</option>
+                                {[...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].map(letter => (
+                                    <option key={letter} value={letter}>{letter}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="input-label">
                             <label htmlFor="symbol">Símbolo</label>
                             <select name="symbol" id="symbol" onChange={handleSelectChange} required>
-                                {stocks.map((stock) => (
+                                {filteredStocks.map((stock) => (
                                     <option key={stock.id} value={stock.stock}>{stock.stock}</option>
                                 ))}
                             </select>

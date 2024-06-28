@@ -20,6 +20,7 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private String newPassword; 
 
     public boolean authenticate(String password) {
         return this.password.equals(password);

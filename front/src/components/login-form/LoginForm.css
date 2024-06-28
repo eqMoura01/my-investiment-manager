@@ -185,7 +185,7 @@ outline: none;
 .email-login i {
   /* content: "\eee1"; */
   position: absolute;
-  top: 9.7rem;
+  top: 10.88rem;
   right: 3.5rem;
   cursor: pointer;
 }
@@ -193,7 +193,7 @@ outline: none;
 .password-login i {
   position: absolute;
   right: 3.5rem;
-  top: 16rem;
+  top: 17.3rem;
   cursor: pointer;
   transition: 0.3s ease;
 }
@@ -201,21 +201,21 @@ outline: none;
 .user-signup i {
   position: absolute;
   right: 3.8rem;
-  top: 7.9rem;
+  top: 9rem;
   cursor: pointer;
 }
 
 .email-signup i {
-  top: 13.1rem;
+  top: 14.2rem;
   position: absolute;
   right: 3.6rem;
   cursor: pointer;
 }
 
 .password-signup i {
-  top: 18.3rem;
+  top: 19.3rem;
   position: absolute;
-  right: 3.7rem;
+  right: 3.6rem;
   cursor: pointer;
   transition: 0.3s ease;
 }

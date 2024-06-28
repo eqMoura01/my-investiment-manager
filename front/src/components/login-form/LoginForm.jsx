@@ -96,37 +96,32 @@ const LoginForm = () => {
                 <h1 className="typewriter">LOGIN</h1>
                 {loginError && <p className="error-message" color='red'>{loginError}</p>}
                 <div className="email-login">
-                  <LoginInput 
-                    className="inpt" 
-                    type="email" 
-                    name="email" 
-                    id="email-login" 
-                    placeholder="Email" 
-                    color="white" 
+                  <LoginInput
+                    className="inpt"
+                    type="email"
+                    name="email"
+                    id="email-login"
+                    placeholder="Email"
+                    color="white"
                     value={loginData.email}
                     onChange={(e) => handleInputChange(e, 'login')}
-                    required 
+                    required
                   />
                   <i className='fa fa-envelope'></i>
                 </div>
                 <div className="password-login">
-                  <LoginInput 
-                    className="inpt" 
-                    type={showPasswordLogin ? "text" : "password"} 
-                    name="password" 
-                    id="password-login" 
-                    placeholder="Password" 
-                    color="white" 
+                  <LoginInput
+                    className="inpt"
+                    type={showPasswordLogin ? "text" : "password"}
+                    name="password"
+                    id="password-login"
+                    placeholder="Password"
+                    color="white"
                     value={loginData.password}
                     onChange={(e) => handleInputChange(e, 'login')}
-                    required 
+                    required
                   />
                   <i id="eye-login" className={`fa ${showPasswordLogin ? "fa-eye" : "fa-eye-slash"}`} onClick={togglePasswordLogin}></i>
-                </div>
-                <div className="forget">
-                  <input type="checkbox" name="checkbox1" id="checkbox" />
-                  <label htmlFor="checkbox">Remember me</label>
-                  <a href="#">Forget Password?</a>
                 </div>
                 <LoginButton text="LOGIN" buttonColor="white" textColor="black" />
               </form>
@@ -142,51 +137,46 @@ const LoginForm = () => {
                 <h1 className="typewriter">SIGN UP</h1>
                 {signupError && <p className="error-message">{signupError}</p>}
                 <div className="user-signup">
-                  <LoginInput 
-                    className="inpt" 
-                    type="text" 
-                    name="name" 
-                    id="username" 
-                    placeholder="User Name" 
-                    color="white" 
+                  <LoginInput
+                    className="inpt"
+                    type="text"
+                    name="name"
+                    id="username"
+                    placeholder="User Name"
+                    color="white"
                     value={signupData.name}
                     onChange={(e) => handleInputChange(e, 'signup')}
-                    required 
+                    required
                   />
                   <i className="fa fa-user"></i>
                 </div>
                 <div className="email-signup">
-                  <LoginInput 
-                    className="inpt" 
-                    type="email" 
-                    name="email" 
-                    id="email-signup" 
-                    placeholder="Email" 
-                    color="white" 
+                  <LoginInput
+                    className="inpt"
+                    type="email"
+                    name="email"
+                    id="email-signup"
+                    placeholder="Email"
+                    color="white"
                     value={signupData.email}
                     onChange={(e) => handleInputChange(e, 'signup')}
-                    required 
+                    required
                   />
                   <i className='fa fa-envelope'></i>
                 </div>
                 <div className="password-signup">
-                  <LoginInput 
-                    className="inpt" 
-                    type={showPasswordSignup ? "text" : "password"} 
-                    name="password" 
-                    id="password-signup" 
-                    placeholder="Password" 
-                    color="white" 
+                  <LoginInput
+                    className="inpt"
+                    type={showPasswordSignup ? "text" : "password"}
+                    name="password"
+                    id="password-signup"
+                    placeholder="Password"
+                    color="white"
                     value={signupData.password}
                     onChange={(e) => handleInputChange(e, 'signup')}
-                    required 
+                    required
                   />
                   <i id="eye-signup" className={`fa ${showPasswordSignup ? "fa-eye" : "fa-eye-slash"}`} onClick={togglePasswordSignup}></i>
-                </div>
-                <div className="forget">
-                  <input type="checkbox" name="checkbox1" id="checkbox1" />
-                  <label htmlFor="checkbox1">Remember me</label>
-                  <a href="#">Forget Password?</a>
                 </div>
                 <LoginButton text="SIGN UP" buttonColor="white" textColor="black" />
               </form>

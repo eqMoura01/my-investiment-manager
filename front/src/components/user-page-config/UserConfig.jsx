@@ -1,4 +1,4 @@
-import "./UserConfig.css";
+import './UserConfig.css';
 import InputField from "../login-input/LoginInput";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,13 +7,16 @@ import axios from 'axios';
 
 const UserPage = () => {
     const [formData, setFormData] = useState({
+        id: '',
         name: '',
         email: '',
         password: '',
         newPassword: ''
     });
 
-    const [showPasswordSignup, setShowPasswordSignup] = useState(false);
+    const [showPasswordOld, setShowPasswordOld] = useState(false);
+    const [showPasswordNew, setShowPasswordNew] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -30,9 +33,10 @@ const UserPage = () => {
                         const userData = response.data;
                         console.log('Dados do usuário recebidos:', userData);
                         setFormData({
+                            id: userData.id,
                             name: userData.name,
                             email: userData.email,
-                            password: '', // Certifique-se de não preencher o campo de senha aqui por razões de segurança
+                            password: '', 
                             newPassword: ''
                         });
                     } else {
@@ -47,8 +51,12 @@ const UserPage = () => {
         fetchUserData();
     }, []);
 
-    const togglePasswordSignup = () => {
-        setShowPasswordSignup(!showPasswordSignup);
+    const togglePasswordOld = () => {
+        setShowPasswordOld(!showPasswordOld);
+    };
+
+    const togglePasswordNew = () => {
+        setShowPasswordNew(!showPasswordNew);
     };
 
     const handleInputChange = (e) => {
@@ -63,26 +71,46 @@ const UserPage = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8080/user/update', formData, {
+            const payload = {
+                id: localStorage.getItem('userId'),
+                name: formData.name,
+                email: formData.email,
+            };
+
+            if (formData.password && formData.newPassword) {
+                payload.password = formData.password;
+                payload.newPassword = formData.newPassword;
+            } else if (formData.password || formData.newPassword) {
+                setErrorMessage('Please fill in both the old and new password.');
+                return;
+            }
+
+            console.log('Payload enviado:', payload);
+
+            const response = await axios.post('http://localhost:8080/user/update', payload, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
+
             if (response.status === 200) {
-                navigate('/dashboard'); // Navega para a página de dashboard após salvar
+                navigate('/home');
             } else {
                 console.error('Erro ao atualizar dados do usuário:', response.statusText);
             }
         } catch (error) {
             console.error('Erro ao atualizar dados do usuário:', error);
+            setErrorMessage('Incorrect password. Please try again.');
         }
     };
 
     return (
         <div className="formUser">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
             <ul>
                 <form onSubmit={handleSubmit}>
                     <h1>User</h1>
+                    {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <div className="user-signup">
                         <InputField
                             type="text"
@@ -93,7 +121,9 @@ const UserPage = () => {
                             onChange={handleInputChange}
                             required
                         />
-                        <i className="fa fa-user"></i>
+                        <div className="icon-container">
+                            <i className="fa fa-user"></i>
+                        </div>
                     </div>
                     <div className="email-login">
                         <InputField
@@ -105,33 +135,40 @@ const UserPage = () => {
                             onChange={handleInputChange}
                             required
                         />
-                        <i className='fa fa-envelope'></i>
+                        <div className="icon-container">
+                            <i className='fa fa-envelope'></i>
+                        </div>
                     </div>
                     <div className="password-signup">
                         <InputField
-                            type={showPasswordSignup ? "text" : "password"}
+                            type={showPasswordOld ? "text" : "password"}
                             name="password"
                             placeholder="Old password"
                             color="white"
                             value={formData.password}
                             onChange={handleInputChange}
-                            required
                         />
-                        <i id="eye-signup" className={`fa ${showPasswordSignup ? "fa-eye" : "fa-eye-slash"}`} onClick={togglePasswordSignup}></i>
+                        <div className="icon-container">
+                            <i id="eye-oldpass" className={`fa ${showPasswordOld ? "fa-eye" : "fa-eye-slash"}`} onClick={togglePasswordOld}></i>
+                        </div>
                     </div>
                     <div className="password-signup">
                         <InputField
-                            type={showPasswordSignup ? "text" : "password"}
+                            type={showPasswordNew ? "text" : "password"}
                             name="newPassword"
                             placeholder="New password"
                             color="white"
                             value={formData.newPassword}
                             onChange={handleInputChange}
-                            required
                         />
-                        <i id="eye-signup" className={`fa ${showPasswordSignup ? "fa-eye" : "fa-eye-slash"}`} onClick={togglePasswordSignup}></i>
+                        <div className="icon-container">
+                            <i id="eye-newpass" className={`fa ${showPasswordNew ? "fa-eye" : "fa-eye-slash"}`} onClick={togglePasswordNew}></i>
+                        </div>
                     </div>
-                    <LoginButton text="SAVE" buttonColor="white" textColor="black" type="submit" />
+                    <div className="button-group">
+                        <LoginButton text="SAVE" buttonColor="white" textColor="black" type="submit" />
+                        <LoginButton text="Return" buttonColor="#white" textColor="black" onClick={() => navigate('/home')} />
+                    </div>
                 </form>
             </ul>
         </div>
