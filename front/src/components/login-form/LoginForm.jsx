@@ -41,6 +41,37 @@ const LoginForm = () => {
     }
   };
 
+  const validatePassword = (password) => {
+    // Pelo menos 5 caracteres, 1 letra maiúscula, 1 caracter especial
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9a-zA-Z]).{5,}$/;
+    return passwordRegex.test(password);
+  };
+
+  const handleSignupSubmit = async (event) => {
+    event.preventDefault();
+
+    const url = 'http://localhost:8080/user/signup';
+
+    if (!validatePassword(signupData.password)) {
+      setSignupError('A senha deve ter pelo menos 5 caracteres, 1 letra maiúscula e 1 caractere especial.');
+      return;
+    }
+
+    try {
+      const response = await axios.post(url, signupData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log('Signup successful:', response.data);
+      setIsLoginForm(true);
+    } catch (error) {
+      console.error('Signup error:', error.response ? error.response.data : error.message);
+      setSignupError('Erro ao registrar. Por favor, tente novamente.'); // Set signup error message
+    }
+  };
+
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
 
@@ -62,26 +93,6 @@ const LoginForm = () => {
     } catch (error) {
       console.error('Login error:', error.response ? error.response.data : error.message);
       setLoginError('Usuário ou senha incorretos'); // Set login error message
-    }
-  };
-
-  const handleSignupSubmit = async (event) => {
-    event.preventDefault();
-
-    const url = 'http://localhost:8080/user/signup';
-
-    try {
-      const response = await axios.post(url, signupData, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      console.log('Signup successful:', response.data);
-      setIsLoginForm(true);
-    } catch (error) {
-      console.error('Signup error:', error.response ? error.response.data : error.message);
-      setSignupError('Erro ao registrar. Por favor, tente novamente.'); // Set signup error message
     }
   };
 

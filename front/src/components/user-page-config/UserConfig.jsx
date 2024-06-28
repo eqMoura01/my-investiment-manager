@@ -67,32 +67,44 @@ const UserPage = () => {
         });
     };
 
+    const validatePassword = (password) => {
+        // Requisitos mínimos da senha
+        const regex = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9a-zA-Z]).{5,}$/;
+        return regex.test(password);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
             const payload = {
                 id: localStorage.getItem('userId'),
                 name: formData.name,
                 email: formData.email,
             };
-
+    
             if (formData.password && formData.newPassword) {
                 payload.password = formData.password;
                 payload.newPassword = formData.newPassword;
             } else if (formData.password || formData.newPassword) {
-                setErrorMessage('Please fill in both the old and new password.');
+                setErrorMessage('Por favor, preencha tanto a senha antiga quanto a nova.');
                 return;
             }
-
+    
+    
+            if (formData.newPassword && !validatePassword(formData.newPassword)) {
+                setErrorMessage('A nova senha deve ter pelo menos 5 caracteres, uma letra maiúscula e um caractere especial.');
+                return;
+            }
+    
             console.log('Payload enviado:', payload);
-
+    
             const response = await axios.post('http://localhost:8080/user/update', payload, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-
+    
             if (response.status === 200) {
                 navigate('/home');
             } else {
@@ -100,7 +112,7 @@ const UserPage = () => {
             }
         } catch (error) {
             console.error('Erro ao atualizar dados do usuário:', error);
-            setErrorMessage('Incorrect password. Please try again.');
+            setErrorMessage('Senha incorreta. Por favor, tente novamente.');
         }
     };
 
@@ -167,7 +179,7 @@ const UserPage = () => {
                     </div>
                     <div className="button-group">
                         <LoginButton text="SAVE" buttonColor="white" textColor="black" type="submit" />
-                        <LoginButton text="Return" buttonColor="#white" textColor="black" onClick={() => navigate('/home')} />
+                        <LoginButton text="Return" buttonColor="white" textColor="black" onClick={() => navigate('/home')} />
                     </div>
                 </form>
             </ul>

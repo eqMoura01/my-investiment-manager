@@ -29,12 +29,12 @@
   background: transparent;
   outline: none;
 }
+
 .error-message {
   color: red;
   font-size: 14px;
   margin-top: 10px;
 }
-
 
 .box-login {
   width: 100%;
@@ -185,37 +185,37 @@ outline: none;
 .email-login i {
   /* content: "\eee1"; */
   position: absolute;
-  top: 10.88rem;
-  right: 3.5rem;
+  top: 1.89rem;
+  right: 2.1rem;
   cursor: pointer;
 }
 
 .password-login i {
   position: absolute;
   right: 3.5rem;
-  top: 17.3rem;
+  top: 17.4rem;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
 .user-signup i {
   position: absolute;
-  right: 3.8rem;
-  top: 9rem;
+  right: 1.6rem;
+  top: 6.5rem;
   cursor: pointer;
 }
 
 .email-signup i {
-  top: 14.2rem;
+  top: 9.1rem;
   position: absolute;
   right: 3.6rem;
   cursor: pointer;
 }
 
 .password-signup i {
-  top: 19.3rem;
+  top: 1.3rem;
   position: absolute;
-  right: 3.6rem;
+  right: 1.4rem;
   cursor: pointer;
   transition: 0.3s ease;
 }
