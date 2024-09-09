@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  core:
+    build:
+      context: ./core
+      dockerfile: Dockerfile
+    container_name: core
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_APPLICATION_NAME: my-investiment-manager
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mim
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_DRIVER-CLASS-NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_HIBERNATE_DDL-AUTO: update
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mim
+      MYSQL_USER: senac
+      MYSQL_PASSWORD: senac
+    ports:
+      - "4306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+  frontend:
+    build: ./front
+    ports:
+      - "3000:80"
+    depends_on:
+      - core
+      - db
+volumes:
+  mysql_data: 
